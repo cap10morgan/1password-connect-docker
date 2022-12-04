@@ -5,7 +5,7 @@ services:
     image: 1password/connect-api:1.5.7
     deploy:
       restart_policy:
-        condition: any
+        condition: on-failure
     volumes:
       - shared:/home/opuser/.op/data
       - ./1password-credentials.json:/home/opuser/.op/1password-credentials.json
@@ -20,7 +20,7 @@ services:
     image: 1password/connect-sync:1.5.7
     deploy:
       restart_policy:
-        condition: any
+        condition: on-failure
     volumes:
       - shared:/home/opuser/.op/data
       - ./1password-credentials.json:/home/opuser/.op/1password-credentials.json
