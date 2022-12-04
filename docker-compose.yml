@@ -1,0 +1,32 @@
+version: "3.4"
+
+services:
+  api:
+    image: 1password/connect-api:1.5.7
+    volumes:
+      - shared:/home/opuser/.op/data
+      - ./1password-credentials.json:/home/opuser/.op/1password-credentials.json
+    networks:
+      - shared
+    # environment:
+    #   OP_BUS_PORT: "49152"
+    #   OP_BUS_PEERS: sync:49152
+    ports:
+      - 58080:8080
+  sync:
+    image: 1password/connect-sync:1.5.7
+    volumes:
+      - shared:/home/opuser/.op/data
+      - ./1password-credentials.json:/home/opuser/.op/1password-credentials.json
+    networks:
+      - shared
+    # environment:
+    #   OP_BUS_PORT: "49152"
+    #   OP_BUS_PEERS: api:49152
+
+volumes:
+  shared:
+
+
+networks:
+  shared:
